@@ -66,11 +66,8 @@ class Item extends Component {
             value={this.props.name}
             onChange={this.handleChange}
           />
-          {/* <button onClick={() => this.props.onRemove(this.props.id)}>
-          Remove
-        </button> */}
           <a
-            className="dim silver"
+            className="dim light-silver"
             style={{ lineHeight: 0, cursor: 'pointer' }}
             onClick={() => this.props.onRemove(this.props.id)}
           >
@@ -91,13 +88,13 @@ class Item extends Component {
           </a>
         </div>
         <div className="flex items-center justify-between pt3 mt3 bt b--black-10">
-          <p className="black-60 mv0">
+          <p className="mv0" style={{ color: '#2D9CDB' }}>
             {this.state.product.price
               ? `$${Math.floor(this.state.product.price)}`
               : '$--'}
           </p>
           <a
-            className="f6 no-underline black-50 dim"
+            className="f6 no-underline black-40 dim"
             href={this.state.product.url}
             target="_blank"
           >

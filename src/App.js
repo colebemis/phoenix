@@ -4,6 +4,7 @@ import { Provider } from 'rebass'
 import Item from './Item'
 import shortid from 'shortid'
 import 'tachyons'
+import Voice from './Voice'
 
 class App extends Component {
   state = { inputValue: '', items: [] }
@@ -38,6 +39,20 @@ class App extends Component {
     this.setState({ items })
   }
 
+  handleVoice = items => {
+    // console.log(items)
+    const itemsWithId = items.map(name => ({
+      id: shortid.generate(),
+      name,
+    }))
+
+    // console.log(Array.from(items))
+
+    this.setState(prevState => ({
+      items: [...itemsWithId, ...prevState.items],
+    }))
+  }
+
   handleItemRemove = id => {
     const { items } = this.state
 
@@ -59,16 +74,20 @@ class App extends Component {
               paddingBottom: 100,
             }}
           >
-            <form onSubmit={this.handleSubmit}>
-              <input
-                className="shadow input-reset f5 pa3 bn br2 w-100 mb4"
-                style={{ fontFamily: 'inherit', boxSizing: 'border-box' }}
-                value={this.state.inputValue}
-                placeholder="What's in your house?"
-                onChange={this.handleInputChange}
-              />
-              {/* <button type="submit">Add</button> */}
-            </form>
+            <div style={{ position: 'relative' }}>
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  className="shadow input-reset f5 pa3 bn br2 w-100 mb4"
+                  style={{ fontFamily: 'inherit', boxSizing: 'border-box' }}
+                  value={this.state.inputValue}
+                  placeholder="What's in your house?"
+                  onChange={this.handleInputChange}
+                />
+
+                {/* <button type="submit">Add</button> */}
+              </form>
+              <Voice onResult={this.handleVoice} />
+            </div>
             {this.state.items.map(item => (
               <Item
                 key={item.id}
